@@ -1,6 +1,10 @@
+import { useContext } from "react"
 import { NavLink } from "react-router-dom"
+import { ShoppingBagIcon } from "@heroicons/react/16/solid"
+import { ShoppingCartContext } from '../../Context'
 
 const Navbar = () =>{
+  const context = useContext(ShoppingCartContext)
   const activeStyle = 'underline underline-offset-4'
     return(
         <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-gray-800 text-white shadow-md">
@@ -116,8 +120,9 @@ const Navbar = () =>{
               </NavLink>
             </li>
             <li><img src="https://static-00.iconduck.com/assets.00/whatsapp-icon-1020x1024-iykox85t.png" alt="Icon" className="h-6 cursor-pointer" /></li>
-            <li>
-              🛒 0
+            <li className="flex items-center">
+              <ShoppingBagIcon className="h-6 w-6 text-white"/>
+              <div>{context.count}</div>
             </li>
             
           </ul>
