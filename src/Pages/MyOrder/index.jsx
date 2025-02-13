@@ -8,8 +8,39 @@ import { ChevronLeftIcon } from '@heroicons/react/24/solid'
 function MyOrder() {
   const context = useContext(ShoppingCartContext)
   const currentPath = window.location.pathname
-  let index = currentPath.substring(currentPath.lastIndexOf('/')+1)
+  let index = currentPath.substring(currentPath.lastIndexOf('/') + 1)
+  
+  // Validar si el índice es 'last' y calcular el índice correcto
   if(index === 'last') index = context.order?.length -1
+
+  const renderView = ()=> {   
+    index = Number(index);
+    if (isNaN(index) || index < 0 || index >= context.order?.length) {
+      return(
+        <p className='text-center text-red-500'>Order not found.</p>
+      )
+    }
+
+    const order = context.order[index];
+    if (!order?.products || order.products.length === 0) {
+      return (
+        <p className='text-center text-red-500'>No products in this order.</p>
+      )
+    }
+
+    return (
+      context.order?.[index].products.map(product => (
+        <OrderCard
+          key={product.id}
+          id={product.id}
+          title={product.title}
+          imageUrl={product.image}
+          price={product.price}
+        />
+      ))
+    )
+
+  }
 
   return (
 
@@ -24,17 +55,7 @@ function MyOrder() {
       </div>
 
       <div className='flex flex-col w-120'>
-        {
-          context.order?.[index].products.map(product => (
-            <OrderCard
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              imageUrl={product.image}
-              price={product.price}
-            />
-          ))
-        }
+        {renderView()}
       </div>
     </Layout>
   )
