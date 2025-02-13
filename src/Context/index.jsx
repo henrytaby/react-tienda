@@ -24,11 +24,15 @@ const ShoppingCartProvider = ({children}) => {
 
     // Get products
     const [items, setItems] = useState(null)
+    const [filteredItems, setFilteredItems] = useState(null)
     
+    // Get products by title
+    const [searchByTitle, setSearchByTitle] = useState(null)
+
+
     useEffect(()=>{
         const fetchData = async () => {
             try {
-              // const response = await fetch("https://api.escuelajs.co/api/v1/products");
               const response = await fetch("https://fakestoreapi.com/products");
               const data = await response.json();
               setItems(data);
@@ -38,9 +42,15 @@ const ShoppingCartProvider = ({children}) => {
           };
         fetchData();
       }, []);
-    // Get products by title
-    const [searchByTitle, setSearchByTitle] = useState(null)
-    console.log(searchByTitle)
+    
+    
+    const filteredItemsByTitle = (items, searchByTitle) =>{
+      return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    }
+
+    useEffect(()=>{
+      if (searchByTitle) setFilteredItems(filteredItemsByTitle(items,searchByTitle))
+    }, [items,searchByTitle]);
 
     const value = useMemo(() => ({
         count,
@@ -60,7 +70,8 @@ const ShoppingCartProvider = ({children}) => {
         items,
         setItems,
         searchByTitle, 
-        setSearchByTitle
+        setSearchByTitle,
+        filteredItems
     }), [
         count,
         isProductDetailOpen,
@@ -70,7 +81,8 @@ const ShoppingCartProvider = ({children}) => {
         isCheckoutSideMenuOpen,
         order,
         items,
-        searchByTitle
+        searchByTitle,
+        filteredItems
     ]); // Dependencias: count
 
     return(
