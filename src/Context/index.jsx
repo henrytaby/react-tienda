@@ -19,6 +19,9 @@ const ShoppingCartProvider = ({children}) => {
     // Shopping Cart - Add products to cart
     const [cartProducts, setCartProducts] = useState([])
 
+    // Shopping Cart - Order
+    const [order, setOrder] = useState([])
+
     const value = useMemo(() => ({
         count,
         setCount,
@@ -31,14 +34,17 @@ const ShoppingCartProvider = ({children}) => {
         setCartProducts,
         isCheckoutSideMenuOpen,
         openCheckoutSideMenu,
-        closeCheckoutSideMenu
+        closeCheckoutSideMenu,
+        order,
+        setOrder
     }), [
         count,
         isProductDetailOpen,
         productToShow,
         cartProducts,
         setCartProducts,
-        isCheckoutSideMenuOpen
+        isCheckoutSideMenuOpen,
+        order
     ]); // Dependencias: count
 
     return(
