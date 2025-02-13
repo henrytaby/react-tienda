@@ -9,8 +9,15 @@ const ShoppingCartProvider = ({children}) => {
     const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
     const openProductDetail = () => setIsProductDetailOpen(true)
     const closeProductDetail = () => setIsProductDetailOpen(false)
+    // Checkout Side Menu - Open/Close
+    const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false)
+    const openCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(true)
+    const closeCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(false)
+
     // Product Detail - Show Product
     const [productToShow, setProductToShow] = useState({})
+    // Shopping Cart - Add products to cart
+    const [cartProducts, setCartProducts] = useState([])
 
     const value = useMemo(() => ({
         count,
@@ -19,11 +26,19 @@ const ShoppingCartProvider = ({children}) => {
         openProductDetail,
         closeProductDetail,
         productToShow,
-        setProductToShow
+        setProductToShow,
+        cartProducts,
+        setCartProducts,
+        isCheckoutSideMenuOpen,
+        openCheckoutSideMenu,
+        closeCheckoutSideMenu
     }), [
         count,
         isProductDetailOpen,
-        productToShow
+        productToShow,
+        cartProducts,
+        setCartProducts,
+        isCheckoutSideMenuOpen
     ]); // Dependencias: count
 
     return(
