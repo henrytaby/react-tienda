@@ -1,4 +1,4 @@
-import { createContext, useState, useMemo } from 'react'
+import { createContext, useState, useMemo, useEffect } from 'react'
 import PropTypes from 'prop-types'; // Importar PropTypes
 const ShoppingCartContext = createContext()
 
@@ -22,6 +22,26 @@ const ShoppingCartProvider = ({children}) => {
     // Shopping Cart - Order
     const [order, setOrder] = useState([])
 
+    // Get products
+    const [items, setItems] = useState(null)
+    
+    useEffect(()=>{
+        const fetchData = async () => {
+            try {
+              // const response = await fetch("https://api.escuelajs.co/api/v1/products");
+              const response = await fetch("https://fakestoreapi.com/products");
+              const data = await response.json();
+              setItems(data);
+            } catch (error) {
+              console.error("Error al obtener los datos:", error);
+            }
+          };
+        fetchData();
+      }, []);
+    // Get products by title
+    const [searchByTitle, setSearchByTitle] = useState(null)
+    console.log(searchByTitle)
+
     const value = useMemo(() => ({
         count,
         setCount,
@@ -36,7 +56,11 @@ const ShoppingCartProvider = ({children}) => {
         openCheckoutSideMenu,
         closeCheckoutSideMenu,
         order,
-        setOrder
+        setOrder,
+        items,
+        setItems,
+        searchByTitle, 
+        setSearchByTitle
     }), [
         count,
         isProductDetailOpen,
@@ -44,7 +68,9 @@ const ShoppingCartProvider = ({children}) => {
         cartProducts,
         setCartProducts,
         isCheckoutSideMenuOpen,
-        order
+        order,
+        items,
+        searchByTitle
     ]); // Dependencias: count
 
     return(

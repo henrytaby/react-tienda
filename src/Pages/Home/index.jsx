@@ -1,39 +1,31 @@
-import { useState, useEffect } from "react"
-import Layout from "../../Components/Layout"
-import Card from "../../Components/Card"
-import ProductDetail from "../../Components/ProductDetail"
+import { useContext } from 'react'
+import Layout from '../../Components/Layout'
+import Card from '../../Components/Card'
+import ProductDetail from '../../Components/ProductDetail'
+import { ShoppingCartContext } from '../../Context'
 
 function Home() {  
-  const [items, setItems] = useState(null)
-
-  useEffect(()=>{
-    const fetchData = async () => {
-        try {
-          // const response = await fetch("https://api.escuelajs.co/api/v1/products");
-          const response = await fetch("https://fakestoreapi.com/products");
-          const data = await response.json();
-          setItems(data);
-        } catch (error) {
-          console.error("Error al obtener los datos:", error);
-        }
-      };
-    fetchData();
-
-  }, []);
-
+  const context = useContext(ShoppingCartContext)
 
   return (
       <Layout>
-        Home
+        <div className='flex items-center justify-center w-120 relative mb-4'>
+        <h1 className='font-medium text-xl'>Exclusive Products</h1>
+        </div>
+        <input 
+        className='rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none'
+        onChange={(event)=> context.setSearchByTitle(event.target.value) }
+        type='text' 
+        placeholder='Search a product' />
+
         <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
           {
-            items?.map(item =>(
+            context.items?.map(item =>(
               <Card key={item.id} data={item} />
             ))
           }
         </div>
         <ProductDetail />
-        
       </Layout>
   )
 }
