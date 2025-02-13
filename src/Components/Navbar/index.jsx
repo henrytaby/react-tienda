@@ -119,7 +119,6 @@ const Navbar = () =>{
               Sign Out
               </NavLink>
             </li>
-            <li><img src="https://static-00.iconduck.com/assets.00/whatsapp-icon-1020x1024-iykox85t.png" alt="Icon" className="h-6 cursor-pointer" /></li>
             <li className="flex items-center">
               <ShoppingBagIcon className="h-6 w-6 text-white"/>
               <div>{context.count}</div>
