@@ -62,3 +62,16 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+
+## BIBLIOGRAFÍA
+
+- https://tailwindcss.com/docs/
+- https://vite.dev/guide/
+- https://heroicons.com/
+- https://react.dev/learn
+- https://react.dev/reference/react-dom
+- https://reactrouter.com/home
+- https://api.reactrouter.com/v7/functions/react_router.useRoutes.html
+- 
