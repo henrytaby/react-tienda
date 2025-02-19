@@ -10,10 +10,10 @@ const Navbar = () =>{
         <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-gray-800 text-white shadow-md">
           {/* Grupo Izquierdo */}
           <ul className="flex items-center gap-3">
-            <li><img src="https://static-00.iconduck.com/assets.00/whatsapp-icon-1020x1024-iykox85t.png" alt="Logo" className="h-8" /></li>
+            <li><img src="./shopping-cart.svg" alt="Logo" className="h-8" /></li>
             <li className="font-semibold text-lg">
               <NavLink to="/">
-                Shopi
+                Products
               </NavLink>
             </li>
             <li>
